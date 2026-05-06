@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDalete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('room_name');
-            $table->dateTime('starts_api');
+            $table->dateTime('starts_at');
             $table->dateTime('ends_at');
             $table->text('note')->nullable();
             $table->timestamps();
