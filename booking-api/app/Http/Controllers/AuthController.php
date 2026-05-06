@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+
 
 class AuthController extends Controller
 {
     public function register(Request $request): JsonResponse
     {
         $data = $request->validate([
-            "name" => 'requared|string|max:255',
-            "email" => 'requared|email|uniquea:users',
-            "password" => 'requared|string|min:8|confirmed',
+            "name" => 'required|string|max:255',
+            "email" => 'required|email|unique:users',
+            "password" => 'required|string|min:8|confirmed',
         ]);
 
         $user = User::create([
@@ -26,7 +28,7 @@ class AuthController extends Controller
 
         return response()->json([
             'user' => $user,
-            'token' => $token,
+            'access_token' => $token,
             'token_type' => 'Bearer',
         ], 201);
     }
